@@ -10,31 +10,32 @@ import web.service.UserService;
 
 import javax.validation.Valid;
 
-
 @Controller
-@RequestMapping("/users")
-public class UserContoller {
-
+public class UsersController {
     private final UserService userService;
 
     @Autowired
-    public UserContoller(UserService userService){
+    public UsersController(UserService userService) {
         this.userService = userService;
     }
+
     @GetMapping()
     public String showUsers(Model model) {
-        model.addAttribute("users",userService.showUsers());
-        return "user/showUsers";
+        model.addAttribute("users", userService.showUsers());
+        return "users/show-users";
     }
+
     @GetMapping("/users/{id}")
     public String getUsers(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getUser(id));
-        return "users/show";
+        return "users/get-user";
     }
 
     @GetMapping("/users/new")
-    public String newUser(@ModelAttribute("user") User user) {
-        return "users/new";
+    public String createUser(@ModelAttribute("user") User user) {
+        return "/users/new";
+
+
     }
 
     @PostMapping()

@@ -9,7 +9,7 @@ import web.model.User;
 
 import java.util.List;
 
-@Service
+@Service("userServiceImpl")
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
@@ -20,13 +20,11 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
     }
 
-    @Transactional(readOnly = true)
     @Override
     public List<User> showUsers() {
         return userDao.showUsers();
     }
 
-    @Transactional
     @Override
     public User getUser(int id) {
         return userDao.getUser(id);
