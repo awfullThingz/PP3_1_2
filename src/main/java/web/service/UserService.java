@@ -5,9 +5,9 @@ import web.model.User;
 import java.util.List;
 
 public interface UserService {
-    List<User> showUsers();
+    List<User> index();
 
-    User getUser(int id);
+    User show(int id);
 
     void save(User user);
 

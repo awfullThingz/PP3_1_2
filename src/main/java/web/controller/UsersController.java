@@ -11,6 +11,7 @@ import web.service.UserService;
 import javax.validation.Valid;
 
 @Controller
+
 public class UsersController {
     private final UserService userService;
 
@@ -20,15 +21,15 @@ public class UsersController {
     }
 
     @GetMapping()
-    public String showUsers(Model model) {
-        model.addAttribute("users", userService.showUsers());
-        return "users/show-users";
+    public String index(Model model) {
+        model.addAttribute("users", userService.index());
+        return "users/index";
     }
 
     @GetMapping("/users/{id}")
-    public String getUsers(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userService.getUser(id));
-        return "users/get-user";
+    public String show(@PathVariable("id") int id, Model model) {
+        model.addAttribute("user", userService.show(id));
+        return "users/show";
     }
 
     @GetMapping("/users/new")
@@ -50,7 +51,7 @@ public class UsersController {
 
     @GetMapping("/users/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("user", userService.getUser(id));
+        model.addAttribute("user", userService.show(id));
         return "users/edit";
     }
 
