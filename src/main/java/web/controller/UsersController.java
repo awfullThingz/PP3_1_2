@@ -27,47 +27,47 @@ public class UsersController {
     }
 
     @GetMapping("/users/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userService.show(id));
+    public String showUser(@PathVariable("id") int id, Model model) {
+        model.addAttribute("user", userService.showUser(id));
         return "users/show";
     }
 
     @GetMapping("/users/new")
-    public String createUser(@ModelAttribute("user") User user) {
+    public String createNewUser(@ModelAttribute("user") User user) {
         return "/users/new";
 
 
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("user") @Valid User user,
+    public String createUser(@ModelAttribute("user") @Valid User user,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "users/new";
 
-        userService.save(user);
+        userService.saveUser(user);
         return "redirect:/";
     }
 
     @GetMapping("/users/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("user", userService.show(id));
+    public String editUser(Model model, @PathVariable("id") int id) {
+        model.addAttribute("user", userService.showUser(id));
         return "users/edit";
     }
 
     @PatchMapping("/users/{id}")
-    public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
+    public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
                          @PathVariable("id") int id) {
         if (bindingResult.hasErrors())
             return "users/edit";
 
-        userService.update(id, user);
+        userService.updateUser(id, user);
         return "redirect:/";
     }
 
     @DeleteMapping("/users/{id}")
-    public String delete(@PathVariable("id") int id) {
-        userService.delete(id);
+    public String deleteUserById(@PathVariable("id") int id) {
+        userService.deleteUser(id);
         return "redirect:/";
     }
 }
