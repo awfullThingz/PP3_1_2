@@ -18,17 +18,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User show(int id) {
+    public User showUser(int id) {
         return entityManager.find(User.class, id);
     }
 
     @Override
-    public void save(User user) {
+    public void saveUser(User user) {
         entityManager.persist(user);
     }
 
     @Override
-    public void update(int id, User updatedUser) {
+    public void updateUser(int id, User updatedUser) {
         User userToBeUpdated = entityManager.find(User.class, id);
 
         userToBeUpdated.setName(updatedUser.getName());
@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void delete(int id) {
-        entityManager.remove(show(id));
+    public void deleteUser(int id) {
+        entityManager.remove(showUser(id));
     }
 }
